@@ -12,6 +12,11 @@ from toggltarget import target
 from workingtime import workingtime
 
 
+import datetime
+t = datetime.time(0, 0, 0)
+d = datetime.date.today()
+dt = datetime.datetime.combine(d, t)
+
 def internet_on():
     """Checks if internet connection is on by connecting to Google"""
     try:
@@ -106,6 +111,16 @@ def main():
 
     normal_min_hours, crunch_min_hours = t.get_minimum_daily_hours(w.business_days_left_count, w.days_left_count)
 
+    print 'Today work tracked',
+    hours_today = round(a.get_hours_tracked(start_date=dt, end_date=w.now), 2)
+    if hours_today > config.WORKING_HOURS_PER_DAY:
+        print hilite("{0:.2f} hours".format(hours_today), True, True)
+    else:
+        print hilite("{0:.2f} hours".format(hours_today), False, True)
+    bar = percentile_bar(hours_today / config.WORKING_HOURS_PER_DAY, config.WORKING_HOURS_PER_DAY)
+    print bar
+
+    print
     print "So far you have tracked",
     print hilite("{0:.2f} hours".format(t.achieved_hours), True, True)
     print "\nBusiness days left till deadline : {}".format(w.business_days_left_count)
