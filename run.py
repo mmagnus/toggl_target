@@ -122,9 +122,14 @@ def main():
 
     print
     print "So far you have tracked",
-    print hilite("{0:.2f} hours".format(t.achieved_hours), True, True)
+    if t.required_hours > normal_min_hours:
+        print hilite("{0:.2f} hours".format(t.achieved_hours), True, True)
+    else:
+        print hilite("{0:.2f} hours".format(t.achieved_hours), False, True)
+
     print "\nBusiness days left till deadline : {}".format(w.business_days_left_count)
     print "Total days left till deadline : {}".format(w.days_left_count)
+
     print "\nThis month targets [Required (minimum)] : {} ({})".format(w.required_hours_this_month, w.required_hours_this_month - (w.required_hours_this_month * config.TOLERANCE_PERCENTAGE))
 
     if config.TOLERANCE_PERCENTAGE:
