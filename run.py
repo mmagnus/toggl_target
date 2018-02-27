@@ -88,14 +88,12 @@ def main():
     a = api.TogglAPI(config.API_TOKEN, config.TIMEZONE)
     t = target.Target()
 
-    print "Hi"
-    print "Checking Internet connectivity..."
+    # "Checking Internet connectivity..."
     if not internet_on():
         print "OMG! There is no internet connection!"
         print "Good Bye Cruel World!"
         sys.exit()
-    print "Internet seems fine!"
-    print "\nTrying to connect to Toggl, hang on!\n"
+    # "Internet seems fine!, Trying to connect to Toggl, hang on!
     try:
         t.achieved_hours = a.get_hours_tracked(start_date=w.month_start, end_date=w.now)
     except:
