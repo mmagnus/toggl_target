@@ -110,8 +110,7 @@ def main():
     t.tolerance      = config.TOLERANCE_PERCENTAGE
 
     normal_min_hours, crunch_min_hours = t.get_minimum_daily_hours(w.business_days_left_count, w.days_left_count)
-
-    print 'Today work tracked',
+    print 'Today (' + str(dt.date()) + ') work tracked',
     hours_today = round(a.get_hours_tracked(start_date=dt, end_date=w.now), 2)
     if hours_today > config.WORKING_HOURS_PER_DAY:
         print hilite("{0:.2f} hours".format(hours_today), True, True)

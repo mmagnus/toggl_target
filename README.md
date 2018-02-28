@@ -5,6 +5,7 @@ At work, we track our working hours on Toggl (www.toggl.com), so I created this 
 
 You will need to install `requests` and `dateutil` python libraries to be able to use this.
 
+![](screen.png)
 
 Installation on linux
 ---------------------
