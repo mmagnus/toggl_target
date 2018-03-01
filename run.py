@@ -113,9 +113,18 @@ def main():
     print 'Today (' + str(dt.date()) + ') work tracked',
     hours_today = round(a.get_hours_tracked(start_date=dt, end_date=w.now), 2)
     if hours_today > config.WORKING_HOURS_PER_DAY:
-        print hilite("{0:.2f} hours".format(hours_today), True, True)
+        print hilite("{0:.2f} hours".format(hours_today), True, True),
     else:
-        print hilite("{0:.2f} hours".format(hours_today), False, True)
+        print hilite("{0:.2f} hours".format(hours_today), False, True),
+
+    print ' Left: ',
+    if (config.WORKING_HOURS_PER_DAY - hours_today > 0):
+        print hilite("{0:.2f} hours".format(config.WORKING_HOURS_PER_DAY - hours_today), False, True)  # wrong
+
+    else:
+        print hilite("{0:.2f} hours".format(config.WORKING_HOURS_PER_DAY - hours_today), True, True)
+
+
     bar = percentile_bar(hours_today / config.WORKING_HOURS_PER_DAY, config.WORKING_HOURS_PER_DAY)
     print bar
 
@@ -125,6 +134,7 @@ def main():
         print hilite("{0:.2f} hours".format(t.achieved_hours), True, True)
     else:
         print hilite("{0:.2f} hours".format(t.achieved_hours), False, True)
+
 
     print "\nBusiness days left till deadline : {}".format(w.business_days_left_count)
     print "Total days left till deadline : {}".format(w.days_left_count)
@@ -144,6 +154,7 @@ def main():
     print "\nHow your progress looks:"
     bar = percentile_bar(t.achieved_percentage, config.TOLERANCE_PERCENTAGE)
     print bar
+    print('today https://toggl.com/app/reports/summary/1254862/period/today/billable/both')
 
 if __name__ == '__main__':
     main()
