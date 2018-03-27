@@ -135,9 +135,10 @@ def main():
     else:
         print hilite("{0:.2f} hours".format(t.achieved_hours), False, True)
 
-
     print "\nBusiness days left till deadline : {}".format(w.business_days_left_count)
     print "Total days left till deadline : {}".format(w.days_left_count)
+
+    print "\nSo far work per day", round(t.achieved_hours / (20 - w.business_days_left_count),2)
 
     print "\nThis month targets [Required (minimum)] : {} ({})".format(w.required_hours_this_month, w.required_hours_this_month - (w.required_hours_this_month * config.TOLERANCE_PERCENTAGE))
 
